@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Habit = require('../models/habitModel')
 
 
-// **********************************  Habits Get From Database   *********************************//
+//  Habits Get From Database
 router.get('/', (req, resp) => {
     
     Habit.find(
@@ -24,7 +24,7 @@ router.get('/', (req, resp) => {
         .sort({ _id: -1 });
    
 })
-//************************   Find the Date and Return the string Date  **************************//
+//Find the Date and Return the string Date 
 function getD(n) {
     let d = new Date();
     d.setDate(d.getDate() + n);
@@ -53,7 +53,7 @@ router.post('/habit',  async(req, resp) => {
     console.log(content)
     Habit.findOne({ content:content }).then(habit => {
         if (habit) {
-            //***********************   Update Existing Habit Status ************************//
+            //Update Existing Habit Status
             let dates = habit.dates, tzoffset = (new Date()).getTimezoneOffset() * 60000;
             var today = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 10);
             dates.find(function (item, index) {
@@ -96,7 +96,7 @@ router.post('/habit',  async(req, resp) => {
     })
   
 });
-//***************************   Habit Status Update per Days  ****************************//
+// Habit Status Update per Days 
 router.get("/habitStatus", (req, resp) => {
     var d = req.query.date;
     var id = req.query.id;
@@ -136,7 +136,7 @@ router.get("/habitStatus", (req, resp) => {
     })
 
 })
-//*************************   Delete  Habit        ***************************//
+//  Delete  Habit  
 router.get("/:id", async (req, resp) => {
     const documentProduct = await Habit.findOneAndRemove({ _id: req.params.id });
     if (!documentProduct) {

@@ -28,11 +28,11 @@ app.use( bodyParser.urlencoded({ extended: true }) );
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-
+ 
 //  Routes 
 app.use(router);
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8000
 
 app.listen(PORT,()=>{
     console.log(`Serving running on port ${PORT}`);
